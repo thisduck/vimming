@@ -1,6 +1,12 @@
-set nocompatible
-
 execute pathogen#infect()
+
+set nocompatible
+set shell=/bin/sh
+
+let g:solarized_termtrans = 1
+colorscheme solarized
+
+let mapleader = " "
 
 syntax on
 set tabstop=2
@@ -26,3 +32,38 @@ set number
 
   " bind K to grep word under cursor
   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" run ctags to take advantage of this: ctags -R .
+nnoremap <leader>. :CtrlPTag<CR>
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+
+" smart case insensitive searching
+set ignorecase
+set smartcase
+set hlsearch
+
+" from thoughtbot
+  " Treat <li> and <p> tags like the block tags they are
+  let g:html_indent_tags = 'li\|p'
+
+  " Open new split panes to right and bottom, which feels more natural
+  set splitbelow
+  set splitright
+
+  " Quicker window movement
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-l> <C-w>l
+
+  " configure syntastic syntax checking to check on open as well as save
+  let g:syntastic_check_on_open=1
+
+  " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
+  let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+
+  " Index ctags from any project, including those outside Rails
+  map <Leader>ct :!ctags -R .<CR>
+
+  " Switch between the last two files
+  nnoremap <leader><leader> <c-^>
