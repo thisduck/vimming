@@ -1,3 +1,5 @@
+set nocompatible
+
 execute pathogen#infect()
 
 syntax on
