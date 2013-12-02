@@ -1,7 +1,6 @@
 execute pathogen#infect()
 
 set nocompatible
-set shell=/bin/sh
 
 let g:solarized_termtrans = 1
 colorscheme solarized
@@ -67,3 +66,56 @@ set hlsearch
 
   " Switch between the last two files
   nnoremap <leader><leader> <c-^>
+
+  augroup vimrcEx
+    autocmd!
+
+    " For all text files set 'textwidth' to 78 characters.
+    autocmd FileType text setlocal textwidth=78
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it for commit messages, when the position is invalid, or when
+    " inside an event handler (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
+
+    " Cucumber navigation commands
+    autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
+    autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+
+    " Set syntax highlighting for specific file types
+    autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+    autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+    " Enable spellchecking for Markdown
+    autocmd FileType markdown setlocal spell
+
+    " Automatically wrap at 80 characters for Markdown
+    autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  augroup END
+
+  " Tab completion
+  " will insert tab at beginning of line,
+  " will use completion if not at beginning
+  set wildmode=list:longest,list:full
+  set complete=.,w,t
+  function! InsertTabWrapper()
+      let col = col('.') - 1
+      if !col || getline('.')[col - 1] !~ '\k'
+          return "\<tab>"
+      else
+          return "\<c-p>"
+      endif
+  endfunction
+  inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
+
+
+set shell=/bin/sh
+
+" automatically open quickfix after grep
+autocmd QuickFixCmdPost *grep* cwindow
+set cursorline
+set showcmd
