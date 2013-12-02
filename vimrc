@@ -20,7 +20,7 @@ set number
   " The Silver Searcher
   if executable('ag')
     " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
+    set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tmp\ --ignore\ log
 
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -119,3 +119,42 @@ set shell=/bin/sh
 autocmd QuickFixCmdPost *grep* cwindow
 set cursorline
 set showcmd
+
+" from gary b
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " RENAME CURRENT FILE
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  function! RenameFile()
+      let old_name = expand('%')
+      let new_name = input('New file name: ', expand('%'), 'file')
+      if new_name != '' && new_name != old_name
+          exec ':saveas ' . new_name
+          exec ':silent !rm ' . old_name
+          redraw!
+      endif
+  endfunction
+  map <leader>n :call RenameFile()<cr>
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " PROMOTE VARIABLE TO RSPEC LET
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  function! PromoteToLet()
+    :normal! dd
+    " :exec '?^\s*it\>'
+    :normal! P
+    :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+    :normal ==
+  endfunction
+  :command! PromoteToLet :call PromoteToLet()
+  :map <leader>p :PromoteToLet<cr>
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " FindConditionals COMMAND
+  " Start a search for conditional branches, both implicit and explicit
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  command! FindConditionals :normal /\<if\>\|\<unless\>\|\<and\>\|\<or\>\|||\|&&<cr>
+
+  " copy to clipboard
+  map <leader>y "*y
+  imap <c-c> <esc>
+
