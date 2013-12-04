@@ -6,7 +6,7 @@
 
   ```
   # first make sure you don't have a `~/.vim` directory or a `~/.vimrc` file.
-  $ git clone https://github.com/thisduck/vimming.git
+  $ git clone https://github.com/thisduck/vimming.git ~/.vim
   $ ln -s ~/.vim/vimrc ~/.vimrc
   $ cd ~/.vim
   $ ./setup.sh
