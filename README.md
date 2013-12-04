@@ -1,11 +1,20 @@
 # To use:
 
-1. Fork the repo to your own account.
-
-2. On the command line:
+1. First make sure you don't have a `~/.vim` directory or a `~/.vimrc` file.
 
   ```
-  # first make sure you don't have a `~/.vim` directory or a `~/.vimrc` file.
+  # if you want to backup
+  $ mv ~/.vim ~/.vim.bak
+  $ mv ~/.vimrc ~/.vimrc.bak
+
+  # otherwise just remove
+  $ rm -rf ~/.vim
+  $ rm ~/.vimrc
+  ```
+
+2. Setup vimming.
+
+  ```
   $ git clone https://github.com/thisduck/vimming.git ~/.vim
   $ ln -s ~/.vim/vimrc ~/.vimrc
   $ cd ~/.vim
@@ -13,6 +22,8 @@
   ```
 
 3. Open `vim` and enjoy.
+  - make sure to get the latest version of vim for your respective system.
+  - `brew install vim` on a mac, for instance.
 
 # Things to note
 
