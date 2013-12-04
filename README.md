@@ -52,6 +52,7 @@
   - If you're in the diff buffer and want the send the changes to your file,
     `:diffput`.
 - `:Gblame` will open a buffer indicating who commited that line.
+- `:Gbrowse` opens the current file in Github.
 
 ## Buffers (bufexplorer)
 
@@ -82,3 +83,20 @@
 - `<Leader>a:` will align based on the `:`.
 - `<Leader>a>` will align based on the `=>`.
 - `<Leader>at` will align based on the `|` for tables.
+
+## Rails [Plugin](https://github.com/tpope/vim-rails)
+
+- `gf` over a class, partial, will take you to the file. (this will even work on
+  symbols: with `has_many :users`, `gf` on the `:users` symbol will take you to
+  the user model.
+- `:Rmodel <model_name>` will take you to the model.
+  - Similar things will happen for `:Rcontroller`, `:Rview`
+  - Try tab completion with the model names, it will show you possible options. Always search in lowercase.
+  - `:RVmodel` will open the model in a vertical split. `:RSmodel` in a
+    horizontal split. `:RVcontroller`, `:RVview` also work.
+- While in a controller method `:R` will take you to the view of that method.
+  `:R` from the view will bring you back to the method. `:RV`, `:RS` will open
+  in splits.
+- While in a model `:A` will take you to the tests.
+- In general `:A` will take you to an alternate file. `:R` will take you to a
+  related file. Play around with these in different files.
