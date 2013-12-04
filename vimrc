@@ -30,7 +30,8 @@ set number
   endif
 
   " bind K to grep word under cursor
-  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
+  nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " run ctags to take advantage of this: ctags -R .
 nnoremap <leader>. :CtrlPTag<CR>
@@ -156,5 +157,14 @@ set showcmd
 
   " copy to clipboard
   map <leader>y "*y
+
+  " ctrl-c as escape
   imap <c-c> <esc>
 
+" alignment helpers from vimcasts
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a> :Tabularize /=><CR>
+vmap <Leader>a> :Tabularize /=><CR>
