@@ -18,6 +18,7 @@
 
 - The leader key is the spacebar.
 - tabstop/shiftwidth/softtabstop is 2
+- Wherever I say "highlight" I mean Visual Mode.
 
 ## Searching
 
@@ -47,3 +48,26 @@
     this will get the changes from the diff buffer.
   - If you're in the diff buffer and want the send the changes to your file,
     `:diffput`.
+
+## Buffers (bufexplorer)
+
+- To see the buffer window: `<Leader>be` (this will replace the current buffer)
+- To see the buffer window in a split: `<Leader>bs` or `<Leader>bv`
+- You can navigate the buffer, press Enter on a file to open it.
+
+## Copy Paste History (YankRing)
+
+- `<Leader>y` will copy things to your normal clipboard (you can paste on other
+  programs).
+- `<Leader>ys` will open a copy history for things you've yanked or deleted.
+  - Press Enter on one to paste it.
+
+## Tagbar
+
+- Use `<Leader>b` to open a split buffer window of all the tags in this file.
+  - Press Enter on any of the tags to go to them.
+
+## Commenting
+
+- Highlight some lines and press `\\` to comment (and uncomment).
+- `\\\` on a line without highlight to comment/uncomment.
