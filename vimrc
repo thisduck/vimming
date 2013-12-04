@@ -182,3 +182,4 @@ nnoremap <Leader>ys :YRShow<CR>
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 let g:ctrlp_map = '<c-p>'
+nmap <c-p> :CtrlP<CR>

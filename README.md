@@ -20,6 +20,8 @@
 - tabstop/shiftwidth/softtabstop is 2
 - Wherever I say "highlight" I mean Visual Mode.
 - You can use `<C-c>` for Esc.
+- When you split a window, it will appear below or to the right (for a vertical
+  split).
 
 ## Searching
 
