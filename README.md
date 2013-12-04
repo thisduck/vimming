@@ -5,11 +5,11 @@
 2. On the command line:
 
   ```
-  $ git clone git@github.com:[YOUR_USERNAME]/vimming.git ~/.vim
+  # first make sure you don't have a `~/.vim` directory and a `~/.vimrc` file.
+  $ git clone https://github.com/thisduck/vimming.git
   $ ln -s ~/.vim/vimrc ~/.vimrc
   $ cd ~/.vim
-  $ git submodule init
-  $ git submodule update
+  $ ./setup.sh
   ```
 
 3. Open `vim` and enjoy.
