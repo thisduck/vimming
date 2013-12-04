@@ -45,7 +45,7 @@ nnoremap <silent> <Leader>b :TagbarToggle<CR>
 set ignorecase
 set smartcase
 set hlsearch
-nmap <silent> ,/ :nohlsearch<CR>
+nmap <silent> <Leader>/ :nohlsearch<CR>
 
 " from thoughtbot
   " Treat <li> and <p> tags like the block tags they are
