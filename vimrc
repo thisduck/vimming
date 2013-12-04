@@ -173,9 +173,12 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a> :Tabularize /=><CR>
 vmap <Leader>a> :Tabularize /=><CR>
+nmap <Leader>at :Tabularize /\|<CR>
+vmap <Leader>at :Tabularize /\|<CR>
 
 " yankring shortcut
 nnoremap <Leader>ys :YRShow<CR>
 
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+let g:ctrlp_map = '<c-p>'

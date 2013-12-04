@@ -19,6 +19,7 @@
 - The leader key is the spacebar.
 - tabstop/shiftwidth/softtabstop is 2
 - Wherever I say "highlight" I mean Visual Mode.
+- You can use `<C-c>` for Esc.
 
 ## Searching
 
@@ -48,6 +49,7 @@
     this will get the changes from the diff buffer.
   - If you're in the diff buffer and want the send the changes to your file,
     `:diffput`.
+- `:Gblame` will open a buffer indicating who commited that line.
 
 ## Buffers (bufexplorer)
 
@@ -71,3 +73,10 @@
 
 - Highlight some lines and press `\\` to comment (and uncomment).
 - `\\\` on a line without highlight to comment/uncomment.
+
+## Alignment (Tabular)
+
+- `<Leader>a=` will align based on the equal sign.
+- `<Leader>a:` will align based on the `:`.
+- `<Leader>a>` will align based on the `=>`.
+- `<Leader>at` will align based on the `|` for tables.
