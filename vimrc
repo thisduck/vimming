@@ -8,12 +8,16 @@ colorscheme solarized
 let mapleader = " "
 
 syntax on
+set hidden
+set backspace=indent,eol,start
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 filetype plugin indent on
 
+set nobackup
+set noswapfile
 set number
 
 " from: http://robots.thoughtbot.com/faster-grepping-in-vim/
@@ -41,6 +45,7 @@ nnoremap <silent> <Leader>b :TagbarToggle<CR>
 set ignorecase
 set smartcase
 set hlsearch
+nmap <silent> ,/ :nohlsearch<CR>
 
 " from thoughtbot
   " Treat <li> and <p> tags like the block tags they are
@@ -172,4 +177,5 @@ vmap <Leader>a> :Tabularize /=><CR>
 " yankring shortcut
 nnoremap <Leader>ys :YRShow<CR>
 
+" setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
