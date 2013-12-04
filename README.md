@@ -5,7 +5,7 @@
 2. On the command line:
 
   ```
-  # first make sure you don't have a `~/.vim` directory and a `~/.vimrc` file.
+  # first make sure you don't have a `~/.vim` directory or a `~/.vimrc` file.
   $ git clone https://github.com/thisduck/vimming.git
   $ ln -s ~/.vim/vimrc ~/.vimrc
   $ cd ~/.vim
