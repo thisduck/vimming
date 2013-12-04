@@ -168,3 +168,8 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 nmap <Leader>a> :Tabularize /=><CR>
 vmap <Leader>a> :Tabularize /=><CR>
+
+" yankring shortcut
+nnoremap <Leader>ys :YRShow<CR>
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
