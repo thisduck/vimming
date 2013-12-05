@@ -179,6 +179,9 @@ vmap <Leader>at :Tabularize /\|<CR>
 " yankring shortcut
 nnoremap <Leader>ys :YRShow<CR>
 
+" replace old style ruby hash syntax with new one
+map <Leader>> :s@:\([^: ]\+\)\s*=>\s*@\1: @g<CR>
+
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
