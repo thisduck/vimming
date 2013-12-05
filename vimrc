@@ -181,5 +181,8 @@ nnoremap <Leader>ys :YRShow<CR>
 
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" ensure that ctrl-p links to ctrlp's file finder, and not YankRing's paste.
+let g:yankring_replace_n_pkey = '<C-t>'
 let g:ctrlp_map = '<c-p>'
 nmap <c-p> :CtrlP<CR>
