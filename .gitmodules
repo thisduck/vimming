@@ -73,3 +73,12 @@
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = git@github.com:nathanaelkane/vim-indent-guides.git
+[submodule "bundle/vim-matchit"]
+	path = bundle/vim-matchit
+	url = git@github.com:edsono/vim-matchit.git
+[submodule "bundle/rainbow_parentheses"]
+	path = bundle/rainbow_parentheses
+	url = git@github.com:kien/rainbow_parentheses.vim.git
+[submodule "bundle/SearchComplete"]
+	path = bundle/SearchComplete
+	url = git@github.com:vim-scripts/SearchComplete.git
