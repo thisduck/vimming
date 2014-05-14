@@ -165,6 +165,7 @@ set showcmd
 
   " ctrl-c as escape
   imap <c-c> <esc>
+  imap jj <esc>
 
 " alignment helpers from vimcasts
 nmap <Leader>a= :Tabularize /=<CR>
@@ -181,6 +182,12 @@ nnoremap <Leader>ys :YRShow<CR>
 
 " replace old style ruby hash syntax with new one
 map <Leader>> :s@:\([^: =]\+\)\s*=>\s*@\1: @g<CR>
+map <Leader>s, :s@,@,\r@g<CR>
+map <Leader>s} :s@}@\r}@g<CR>
+map <Leader>s{ :s@{@{\r@g<CR>
+map <Leader>s( :s@(@(\r@g<CR>
+
+map <Leader>nt :NERDTreeToggle<CR>
 
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim

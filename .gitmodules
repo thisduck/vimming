@@ -82,3 +82,12 @@
 [submodule "bundle/SearchComplete"]
 	path = bundle/SearchComplete
 	url = git@github.com:vim-scripts/SearchComplete.git
+[submodule "bundle/vim-emblem"]
+	path = bundle/vim-emblem
+	url = https://github.com/heartsentwined/vim-emblem.git
+[submodule "bundle/vim-ember-script"]
+	path = bundle/vim-ember-script
+	url = https://github.com/heartsentwined/vim-ember-script.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
