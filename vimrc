@@ -16,6 +16,12 @@ set softtabstop=2
 set expandtab
 filetype plugin indent on
 
+" folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
 set nobackup
 set noswapfile
 set number
@@ -165,6 +171,7 @@ set showcmd
 
   " ctrl-c as escape
   imap <c-c> <esc>
+  imap jj <esc>
 
 " alignment helpers from vimcasts
 nmap <Leader>a= :Tabularize /=<CR>
@@ -176,11 +183,13 @@ vmap <Leader>a> :Tabularize /=><CR>
 nmap <Leader>at :Tabularize /\|<CR>
 vmap <Leader>at :Tabularize /\|<CR>
 
+map <Leader>nt :NERDTreeToggle<CR>
+
 " yankring shortcut
 nnoremap <Leader>ys :YRShow<CR>
 
 " replace old style ruby hash syntax with new one
-map <Leader>> :s@:\([^: =]\+\)\s*=>\s*@\1: @g<CR>
+map <Leader>> :s@:\([^: =({})]\+\)\s*=>\s*@\1: @g<CR>
 
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
@@ -189,3 +198,4 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 let g:yankring_replace_n_pkey = '<C-t>'
 let g:ctrlp_map = '<c-p>'
 nmap <c-p> :CtrlP<CR>
+set background=light
