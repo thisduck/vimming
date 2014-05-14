@@ -24,6 +24,7 @@
 3. Open `vim` and enjoy.
   - make sure to get the latest version of vim for your respective system.
   - `brew install vim` on a mac, for instance.
+  - also add `alias vi=vim` to your `~/.bashrc` or `~/.zsrhc` file.
 
 # Things to note
 

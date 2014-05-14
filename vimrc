@@ -16,6 +16,12 @@ set softtabstop=2
 set expandtab
 filetype plugin indent on
 
+" folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
 set nobackup
 set noswapfile
 set number
@@ -188,6 +194,7 @@ map <Leader>s{ :s@{@{\r@g<CR>
 map <Leader>s( :s@(@(\r@g<CR>
 
 map <Leader>nt :NERDTreeToggle<CR>
+map <Leader>> :s@:\([^: =({})]\+\)\s*=>\s*@\1: @g<CR>
 
 " setup powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
@@ -196,3 +203,4 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 let g:yankring_replace_n_pkey = '<C-t>'
 let g:ctrlp_map = '<c-p>'
 nmap <c-p> :CtrlP<CR>
+set background=light
