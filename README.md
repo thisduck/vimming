@@ -16,15 +16,16 @@
 
   ```
   $ git clone https://github.com/thisduck/vimming.git ~/.vim
-  $ ln -s ~/.vim/vimrc ~/.vimrc
   $ cd ~/.vim
-  $ ./setup.sh
+  $ rake
   ```
 
 3. Open `vim` and enjoy.
   - make sure to get the latest version of vim for your respective system.
   - `brew install vim` on a mac, for instance.
   - also add `alias vi=vim` to your `~/.bashrc` or `~/.zsrhc` file.
+  - also install the silver searcher: `brew install the_silver_searcher` or the
+    equivalent for your system.
 
 # Things to note
 
