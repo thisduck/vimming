@@ -31,6 +31,7 @@ plugin 'vim-emblem', 'https://github.com/heartsentwined/vim-emblem.git'
 plugin 'gist-vim', 'git://github.com/mattn/gist-vim.git'
 plugin 'webapi-vim', 'git://github.com/mattn/webapi-vim.git'
 plugin 'nerdtree', 'git://github.com/scrooloose/nerdtree.git'
+plugin 'emmet-vim', 'git://github.com/mattn/emmet-vim.git'
 
 plugin 'AutoTag', 'git@github.com:vim-scripts/AutoTag.git'
 # plugin 'vim-textobj-rubyblock', 'git@github.com:nelstrom/vim-textobj-rubyblock.git'
