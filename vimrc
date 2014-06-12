@@ -14,6 +14,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set encoding=utf-8
 filetype plugin indent on
 
 " folding
@@ -171,7 +172,6 @@ set showcmd
 
   " ctrl-c as escape
   imap <c-c> <esc>
-  imap jj <esc>
 
 " alignment helpers from vimcasts
 nmap <Leader>a= :Tabularize /=<CR>
@@ -204,3 +204,13 @@ let g:yankring_replace_n_pkey = '<C-t>'
 let g:ctrlp_map = '<c-p>'
 nmap <c-p> :CtrlP<CR>
 set background=light
+
+" vim session shortcuts
+let g:session_directory = '~/.vim/session'
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+let g:session_command_aliases = 1
+nnoremap <Leader>so :OpenSession
+nnoremap <Leader>sc :CloseSession
+nnoremap <Leader>ss :SaveSession
+nnoremap <Leader>sd :DeleteSession
