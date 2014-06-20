@@ -83,6 +83,12 @@ set hlsearch
 " Make regex a little easier to type
 set magic
 
+" Set grep to use The Silver Searcher
+set grepprg=ag\ --nogroup\ --nocolor
+
+" Set default shell
+set shell=/bin/sh
+
 " Tab settings
 set tabstop=2                     " width of tab
 set shiftwidth=2                  " shifting >>, <<, ==
@@ -145,9 +151,31 @@ nnoremap <Leader>gd :Gdiff<cr>
 " <Leader>gr: Open Fugitive git rm
 nnoremap <Leader>gr :Gremove<cr>
 
+" run ctags to take advantage of this: ctags -R .
+nnoremap <leader>ct :CtrlPTag<cr>
+
+" <Leader>so: Open Session
+nnoremap <Leader>so :OpenSession
+
+" <Leader>sc: Close Session
+nnoremap <Leader>sc :CloseSession
+
+" <Leader>ss: Save Session
+nnoremap <Leader>ss :SaveSession
+
+" <Leader>sd: Delete Session
+nnoremap <Leader>sd :DeleteSession
+
 "===============================================================================
 " Normal Mode Key Mappings
 "===============================================================================
+
+" Ctrl-P: Opens CtrlP
+nmap <c-p> :CtrlP<CR>
+let g:ctrlp_map = '<c-p>'
+
+" Ctrl-C: <ESC>
+imap <c-c> <esc>
 
 " Quicker window movement
 nnoremap <C-j> <C-w>j
@@ -169,58 +197,7 @@ augroup MyAutoCmd
   autocmd BufWinLeave * if &modifiable && &ft!='unite' | call clearmatches() | endif
 augroup END
 
-"===============================================================================
-" Plugin Settings
-"===============================================================================
-
-" NERDTree Settings
-let NERDTreeShowBookmarks=1
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-" Close vim if the only window open is NERDTree
-autocmd MyAutoCmd BufEnter * 
-  \ if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" mapping
-nmap <c-p> :CtrlP<CR>
-imap <c-c> <esc>
-map <leader>y "*y
-
-" tabbing
-
-" The Silver Searcher
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
-
-" bind K to grep word under cursor
-nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
-nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" run ctags to take advantage of this: ctags -R .
-nnoremap <leader>. :CtrlPTag<CR>
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
-
-" from thoughtbot
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
-
-
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-
-" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-
-" Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R .<CR>
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
-
-augroup vimrcEx
+augroup MyAutoCmd
   autocmd!
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
@@ -242,74 +219,50 @@ augroup vimrcEx
   autocmd FileType markdown setlocal spell
 augroup END
 
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-set complete=.,w,t
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+"===============================================================================
+" Plugin Settings
+"===============================================================================
 
-let g:ctrlp_map = '<c-p>'
+" NERDTree Settings
+let NERDTreeShowBookmarks=1
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+" Close vim if the only window open is NERDTree
+autocmd MyAutoCmd BufEnter * 
+  \ if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-set shell=/bin/sh
+" CtrlP Settings
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+
+" Session Settings
+let g:session_directory = '~/.vim/session'
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+let g:session_command_aliases = 1
+
+" mapping
+map <leader>y "*y
+
+
+" bind K to grep word under cursor
+nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
+nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
+
+" configure syntastic syntax checking to check on open as well as save
+let g:syntastic_check_on_open=1
+
+" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
+let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+
 
 " automatically open quickfix after grep
 autocmd QuickFixCmdPost *grep* cwindow
 set cursorline
 set showcmd
-
-" from gary b
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " RENAME CURRENT FILE
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  function! RenameFile()
-      let old_name = expand('%')
-      let new_name = input('New file name: ', expand('%'), 'file')
-      if new_name != '' && new_name != old_name
-          exec ':saveas ' . new_name
-          exec ':silent !rm ' . old_name
-          redraw!
-      endif
-  endfunction
-  map <leader>n :call RenameFile()<cr>
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " PROMOTE VARIABLE TO RSPEC LET
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  function! PromoteToLet()
-    :normal! dd
-    " :exec '?^\s*it\>'
-    :normal! P
-    :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-    :normal ==
-  endfunction
-  :command! PromoteToLet :call PromoteToLet()
-  :map <leader>p :PromoteToLet<cr>
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " FindConditionals COMMAND
-  " Start a search for conditional branches, both implicit and explicit
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  command! FindConditionals :normal /\<if\>\|\<unless\>\|\<and\>\|\<or\>\|||\|&&<cr>
-
-
-" alignment helpers from vimcasts
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a> :Tabularize /=><CR>
-vmap <Leader>a> :Tabularize /=><CR>
-nmap <Leader>at :Tabularize /\|<CR>
-vmap <Leader>at :Tabularize /\|<CR>
 
 " yankring shortcut
 nnoremap <Leader>ys :YRShow<CR>
@@ -329,12 +282,3 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 " ensure that ctrl-p links to ctrlp's file finder, and not YankRing's paste.
 let g:yankring_replace_n_pkey = '<C-t>'
 
-" vim session shortcuts
-let g:session_directory = '~/.vim/session'
-let g:session_autoload = 'no'
-let g:session_autosave = 'no'
-let g:session_command_aliases = 1
-nnoremap <Leader>so :OpenSession
-nnoremap <Leader>sc :CloseSession
-nnoremap <Leader>ss :SaveSession
-nnoremap <Leader>sd :DeleteSession
