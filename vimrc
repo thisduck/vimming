@@ -16,6 +16,9 @@ syntax enable
 " General Settings
 "===============================================================================
 
+" Set default shell
+set shell=/bin/sh
+
 " Theme
 set background=light
 colorscheme solarized
@@ -41,6 +44,12 @@ set timeout timeoutlen=200 ttimeoutlen=1
 set nobackup
 set nowritebackup
 set noswapfile
+
+" Highlight current line cursor is on
+set cursorline
+
+" Show the current command being inputted
+set showcmd
 
 " Sets how many lines of history vim has to remember
 set history=10000
@@ -86,8 +95,9 @@ set magic
 " Set grep to use The Silver Searcher
 set grepprg=ag\ --nogroup\ --nocolor
 
-" Set default shell
-set shell=/bin/sh
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
 
 " Tab settings
 set tabstop=2                     " width of tab
@@ -128,10 +138,10 @@ let maplocalleader = " "
 let g:maplocalleader = " "
 
 " <Leader>t: Toggle tagbar
-nnoremap <silent> <Leader>t :TagbarToggle<cr>
+nnoremap <Leader>t :TagbarToggle<cr>
 
 " <Leader>nt: Toggle NERDTree
-nnoremap <silent> <Leader>nt :NERDTreeToggle<cr>
+nnoremap <Leader>nt :NERDTreeToggle<cr>
 
 " <Leader>gs: Open Fugitive git status
 nnoremap <Leader>gs :Gstatus<cr>
@@ -151,7 +161,7 @@ nnoremap <Leader>gd :Gdiff<cr>
 " <Leader>gr: Open Fugitive git rm
 nnoremap <Leader>gr :Gremove<cr>
 
-" run ctags to take advantage of this: ctags -R .
+" <Leader>ct: Open CtrlP Ctags
 nnoremap <leader>ct :CtrlPTag<cr>
 
 " <Leader>so: Open Session
@@ -166,21 +176,30 @@ nnoremap <Leader>ss :SaveSession
 " <Leader>sd: Delete Session
 nnoremap <Leader>sd :DeleteSession
 
+" <Leader>yr: Open Yankring
+nnoremap <Leader>yr :YRShow<CR>
+
 "===============================================================================
 " Normal Mode Key Mappings
 "===============================================================================
 
-" Ctrl-P: Opens CtrlP
-nmap <c-p> :CtrlP<CR>
-let g:ctrlp_map = '<c-p>'
+" <C-p>: Opens CtrlP
+nmap <C-p> :CtrlP<CR>
+let g:ctrlp_map = '<C-p>'
 
-" Ctrl-C: <ESC>
-imap <c-c> <esc>
+" <C-c>: <ESC>
+imap <C-c> <esc>
 
-" Quicker window movement
+" <C-j>: Move to lower window
 nnoremap <C-j> <C-w>j
+
+" <C-k>: Move to upper window
 nnoremap <C-k> <C-w>k
+
+" <C-h>: Move to left window
 nnoremap <C-h> <C-w>h
+
+" <C-l>: Move to right window
 nnoremap <C-l> <C-w>l
 
 "===============================================================================
@@ -219,6 +238,9 @@ augroup MyAutoCmd
   autocmd FileType markdown setlocal spell
 augroup END
 
+" Automatically open quickfix window after grepping
+autocmd QuickFixCmdPost *grep* cwindow
+
 "===============================================================================
 " Plugin Settings
 "===============================================================================
@@ -241,44 +263,8 @@ let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:session_command_aliases = 1
 
-" mapping
-map <leader>y "*y
-
-
-" bind K to grep word under cursor
-nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
-nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
-
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-
-" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
+" Rails Settings
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
-
-" automatically open quickfix after grep
-autocmd QuickFixCmdPost *grep* cwindow
-set cursorline
-set showcmd
-
-" yankring shortcut
-nnoremap <Leader>ys :YRShow<CR>
-
-" replace old style ruby hash syntax with new one
-map <Leader>> :s@:\([^: =]\+\)\s*=>\s*@\1: @g<CR>
-map <Leader>s, :s@,@,\r@g<CR>
-map <Leader>s} :s@}@\r}@g<CR>
-map <Leader>s{ :s@{@{\r@g<CR>
-map <Leader>s( :s@(@(\r@g<CR>
-
-map <Leader>> :s@:\([^: =({})]\+\)\s*=>\s*@\1: @g<CR>
-
-" setup powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
-" ensure that ctrl-p links to ctrlp's file finder, and not YankRing's paste.
-let g:yankring_replace_n_pkey = '<C-t>'
-
+" Syntastic Settings
+let g:syntastic_check_on_open=1
