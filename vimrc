@@ -127,6 +127,24 @@ nnoremap <silent> <Leader>t :TagbarToggle<cr>
 " <Leader>nt: Toggle NERDTree
 nnoremap <silent> <Leader>nt :NERDTreeToggle<cr>
 
+" <Leader>gs: Open Fugitive git status
+nnoremap <Leader>gs :Gstatus<cr>
+
+" <Leader>gc: Open Fugitive git commit
+nnoremap <Leader>gc :Gcommit<cr>
+
+" <Leader>gp: Open Fugitive git push
+nnoremap <Leader>gp :Git push<cr>
+
+" <Leader>gb: Open Fugitive git blame
+nnoremap <Leader>gb :Gblame<cr>
+
+" <Leader>gd: Open Fugitive git diff
+nnoremap <Leader>gd :Gdiff<cr>
+
+" <Leader>gr: Open Fugitive git rm
+nnoremap <Leader>gr :Gremove<cr>
+
 "===============================================================================
 " Normal Mode Key Mappings
 "===============================================================================
@@ -150,6 +168,18 @@ augroup MyAutoCmd
   autocmd InsertLeave * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
   autocmd BufWinLeave * if &modifiable && &ft!='unite' | call clearmatches() | endif
 augroup END
+
+"===============================================================================
+" Plugin Settings
+"===============================================================================
+
+" NERDTree Settings
+let NERDTreeShowBookmarks=1
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+" Close vim if the only window open is NERDTree
+autocmd MyAutoCmd BufEnter * 
+  \ if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " mapping
 nmap <c-p> :CtrlP<CR>
