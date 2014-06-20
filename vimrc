@@ -19,6 +19,9 @@ syntax enable
 " Set default shell
 set shell=/bin/sh
 
+" Disable splash screen
+set shortmess+=I
+
 " Theme
 set background=light
 colorscheme solarized
@@ -94,7 +97,6 @@ set magic
 
 " Set grep to use The Silver Searcher
 set grepprg=ag\ --nogroup\ --nocolor
-
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -177,14 +179,21 @@ nnoremap <Leader>ss :SaveSession
 nnoremap <Leader>sd :DeleteSession
 
 " <Leader>yr: Open Yankring
-nnoremap <Leader>yr :YRShow<CR>
+nnoremap <Leader>yr :YRShow<cr>
+
+" <Leader>ut: Toggle Gundo
+nnoremap <Leader>ut :GundoToggle<cr>
+
+" <Leader>bs: Open BufExplorer horizontal split
+
+" <Leader>bv: Open BufExplorer vertical split
 
 "===============================================================================
 " Normal Mode Key Mappings
 "===============================================================================
 
 " <C-p>: Opens CtrlP
-nmap <C-p> :CtrlP<CR>
+nmap <C-p> :CtrlP<cr>
 let g:ctrlp_map = '<C-p>'
 
 " <C-c>: <ESC>
@@ -241,6 +250,9 @@ augroup END
 " Automatically open quickfix window after grepping
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Close vim if the only window open is NERDTree
+autocmd MyAutoCmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 "===============================================================================
 " Plugin Settings
 "===============================================================================
@@ -249,9 +261,6 @@ autocmd QuickFixCmdPost *grep* cwindow
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-" Close vim if the only window open is NERDTree
-autocmd MyAutoCmd BufEnter * 
-  \ if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " CtrlP Settings
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
