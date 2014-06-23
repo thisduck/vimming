@@ -15,7 +15,7 @@
 2. Setup vimming.
 
   ```
-  $ git clone https://github.com/thisduck/vimming.git ~/.vim
+  $ git clone https://github.com/hinshun/vimming.git ~/.vim
   $ cd ~/.vim
   $ rake
   ```
