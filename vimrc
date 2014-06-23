@@ -5,7 +5,7 @@ execute pathogen#infect()
 set nocompatible
 
 " Set augroup
-augroup MyAutoCmd
+augroup auglobal
   autocmd!
 augroup END
 
@@ -221,46 +221,32 @@ vmap <C-t> :Tabularize
 " gc: Comment toggle
 
 "===============================================================================
-" Autocommand
+" Autocommands
 "===============================================================================
 
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-augroup MyAutoCmd
-  autocmd BufWinEnter * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
-  autocmd InsertEnter * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
-  autocmd InsertLeave * if &modifiable && &ft!='unite' | match ExtraWhitespace /\s\+$/ | endif
-  autocmd BufWinLeave * if &modifiable && &ft!='unite' | call clearmatches() | endif
-augroup END
+augroup auglobal
+  " Wrap lines in QuickFix buffer so that characters will not get lost
+  autocmd bufenter * if &buftype == 'quickfix' | setlocal wrap | endif
+  autocmd BufWinEnter * if &buftype == 'quickfix' | setlocal wrap | endif
 
-augroup MyAutoCmd
-  autocmd!
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+  autocmd BufReadPost * if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
   " Cucumber navigation commands
   autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
   autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  " Automatically open quickfix window after grepping
+  autocmd QuickFixCmdPost *grep* cwindow
+
+  " Close vim if the only window open is NERDTree
+  autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
 augroup END
-
-" Automatically open quickfix window after grepping
-autocmd QuickFixCmdPost *grep* cwindow
-
-" Close vim if the only window open is NERDTree
-autocmd MyAutoCmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "===============================================================================
 " Plugin Settings
@@ -272,7 +258,8 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 
 " CtrlP Settings
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_use_caching = 0
 
 " Session Settings
@@ -286,3 +273,6 @@ let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
 " Syntastic Settings
 let g:syntastic_check_on_open=1
+
+" YankRing Settings
+let g:yankring_replace_n_pkey = ''
