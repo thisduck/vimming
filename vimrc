@@ -9,7 +9,10 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
+" Turn on automatic indentation
 filetype plugin indent on
+
+" Enable syntax
 syntax enable
 
 "===============================================================================
@@ -147,6 +150,9 @@ nnoremap <Leader>nt :NERDTreeToggle<cr>
 
 " <Leader>gs: Open Fugitive git status
 nnoremap <Leader>gs :Gstatus<cr>
+
+" <Leader>ga: Open Fugitive git add
+nnoremap <Leader>ga :Gwrite<cr>
 
 " <Leader>gc: Open Fugitive git commit
 nnoremap <Leader>gc :Gcommit<cr>
