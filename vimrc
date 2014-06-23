@@ -139,8 +139,8 @@ let g:mapleader = " "
 let maplocalleader = " "
 let g:maplocalleader = " "
 
-" <Leader>t: Toggle tagbar
-nnoremap <Leader>t :TagbarToggle<cr>
+" <Leader>tb: Toggle tagbar
+nnoremap <Leader>tb :TagbarToggle<cr>
 
 " <Leader>nt: Toggle NERDTree
 nnoremap <Leader>nt :NERDTreeToggle<cr>
@@ -159,9 +159,6 @@ nnoremap <Leader>gb :Gblame<cr>
 
 " <Leader>gd: Open Fugitive git diff
 nnoremap <Leader>gd :Gdiff<cr>
-
-" <Leader>gr: Open Fugitive git rm
-nnoremap <Leader>gr :Gremove<cr>
 
 " <Leader>ct: Open CtrlP Ctags
 nnoremap <leader>ct :CtrlPTag<cr>
@@ -189,7 +186,7 @@ nnoremap <Leader>ut :GundoToggle<cr>
 " <Leader>bv: Open BufExplorer vertical split
 
 "===============================================================================
-" Normal Mode Key Mappings
+" Mode Key Mappings
 "===============================================================================
 
 " <C-p>: Opens CtrlP
@@ -200,7 +197,7 @@ let g:ctrlp_map = '<C-p>'
 imap <C-c> <esc>
 
 " <C-j>: Move to lower window
-nnoremap <C-j> <C-w>j
+nnoremap <C-j> <C-w>
 
 " <C-k>: Move to upper window
 nnoremap <C-k> <C-w>k
@@ -210,6 +207,10 @@ nnoremap <C-h> <C-w>h
 
 " <C-l>: Move to right window
 nnoremap <C-l> <C-w>l
+
+" <Leader>ta: Tabularize
+nnoremap <C-t> :Tabularize
+vmap <C-t> :Tabularize
 
 " gc: Comment toggle
 
