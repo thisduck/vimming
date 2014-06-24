@@ -202,18 +202,6 @@ let g:ctrlp_map = '<C-p>'
 " <C-c>: <ESC>
 imap <C-c> <esc>
 
-" <C-j>: Move to lower window
-nnoremap <C-j> <C-w>
-
-" <C-k>: Move to upper window
-nnoremap <C-k> <C-w>k
-
-" <C-h>: Move to left window
-nnoremap <C-h> <C-w>h
-
-" <C-l>: Move to right window
-nnoremap <C-l> <C-w>l
-
 " <Leader>ta: Tabularize
 nnoremap <C-t> :Tabularize
 vmap <C-t> :Tabularize
@@ -252,27 +240,32 @@ augroup END
 " Plugin Settings
 "===============================================================================
 
-" NERDTree Settings
+" NERDTree
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 
-" CtrlP Settings
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+" CtrlP
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g "" -p --path-to-agignore "~/.agignore"'
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_use_caching = 0
 
-" Session Settings
+" Session
 let g:session_directory = '~/.vim/session'
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 let g:session_command_aliases = 1
 
-" Rails Settings
+" Rails
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
-" Syntastic Settings
+" Syntastic
 let g:syntastic_check_on_open=1
 
-" YankRing Settings
+" YankRing
 let g:yankring_replace_n_pkey = ''
+
+" EasyMotion
+map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+hi link EasyMotionShade  Comment
