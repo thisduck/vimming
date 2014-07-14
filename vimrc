@@ -43,6 +43,9 @@ set t_vb=
 " Explicitly set encoding to utf-8
 set encoding=utf-8
 
+" Show current mode
+set showmode
+
 " Lower the delay of escaping out of other modes
 set timeout timeoutlen=200 ttimeoutlen=1
 
@@ -99,7 +102,7 @@ set hlsearch
 set magic
 
 " Set grep to use The Silver Searcher
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --nogroup\ --nocolor\ --ignore\ tmp\ --ignore\ log
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -117,6 +120,15 @@ set textwidth=80
 
 " Auto complete setting
 set completeopt=longest,menuone
+
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
 
 " Wild menu settings
 set wildmode=list:longest,full
@@ -187,24 +199,35 @@ nnoremap <Leader>yr :YRShow<cr>
 " <Leader>ut: Toggle Gundo
 nnoremap <Leader>ut :GundoToggle<cr>
 
+" <Leader>ct: Index Ctags
+nnoremap <Leader>ct :!ctags -R .<CR>
+
+" <Leader>y: Copy to system clipboard
+nnoremap <leader>y "*y
+
+" <Leader>/: Clear highlighted searches
+nnoremap <Leader>/ :nohlsearch<CR>
+
 " <Leader>bs: Open BufExplorer horizontal split
 
 " <Leader>bv: Open BufExplorer vertical split
 
 "===============================================================================
-" Mode Key Mappings
+" Non-leader Key Mappings
 "===============================================================================
 
 " <C-p>: Opens CtrlP
-nmap <C-p> :CtrlP<cr>
-let g:ctrlp_map = '<C-p>'
+nnoremap <C-p> :CtrlP<cr>
 
-" <C-c>: <ESC>
-imap <C-c> <esc>
-
-" <Leader>ta: Tabularize
+" <C-t>: Tabularize
 nnoremap <C-t> :Tabularize
 vmap <C-t> :Tabularize
+
+" <C-c>: <ESC>
+inoremap <C-c> <esc>
+
+" Tab completion
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 " gc: Comment toggle
 
@@ -234,6 +257,9 @@ augroup auglobal
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
+
+  " Initialize Airline sections
+  autocmd VimEnter * call AirlineInit()
 augroup END
 
 "===============================================================================
@@ -246,7 +272,8 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 
 " CtrlP
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g "" -p --path-to-agignore "~/.agignore"'
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g "" -p ~/'
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_use_caching = 0
 
@@ -269,3 +296,58 @@ let g:yankring_replace_n_pkey = ''
 map <Leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 hi link EasyMotionShade  Comment
+
+" Airline
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+function! AirlineInit()
+  let g:airline_section_b = airline#section#create_left(['%t'])
+  let g:airline_section_c = airline#section#create([''])
+  let g:airline_section_x = airline#section#create_right([''])
+  let g:airline_section_y = airline#section#create_right(['%c'])
+  let g:airline_section_z = airline#section#create_right(['branch'])
+endfunction
+
+let g:airline_theme_patch_func = 'AirLineTheme'
+function! AirLineTheme(palette)
+  if g:airline_theme == 'solarized'
+
+    let green = ['', '', 255, 64, '']
+    let magenta = ['', '', 255, 125, '']
+    let orange = ['', '', 255, 166, '']
+
+    let modes = {
+      \ 'insert': green,
+      \ 'replace': magenta,
+      \ 'visual': orange
+      \}
+
+    for key in keys(modes)
+      let a:palette[key].airline_a = modes[key]
+      let a:palette[key].airline_z = modes[key]
+    endfor
+  endif
+endfunction
+
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V-L',
+  \ '' : 'V-B',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
