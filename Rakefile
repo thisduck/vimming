@@ -1,6 +1,6 @@
 load 'plugins.rake'
 
-plugin 'AutoTag'              , 'git@github.com:vim-scripts/AutoTag.git'
+plugin 'AutoTag'              , 'git://github.com/craigemery/vim-autotag.git'
 plugin 'YankRing.vim'         , 'git://github.com/vim-scripts/YankRing.vim.git'
 plugin 'ag.vim'               , 'git://github.com/rking/ag.vim.git'
 plugin 'bufexplorer'          , 'git://github.com/jlanzarotta/bufexplorer.git'
