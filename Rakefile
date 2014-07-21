@@ -32,5 +32,5 @@ plugin 'gist-vim', 'git://github.com/mattn/gist-vim.git'
 plugin 'webapi-vim', 'git://github.com/mattn/webapi-vim.git'
 plugin 'nerdtree', 'git://github.com/scrooloose/nerdtree.git'
 
-plugin 'AutoTag', 'git@github.com:vim-scripts/AutoTag.git'
+# plugin 'AutoTag', 'git@github.com:vim-scripts/AutoTag.git'
 # plugin 'vim-textobj-rubyblock', 'git@github.com:nelstrom/vim-textobj-rubyblock.git'
