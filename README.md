@@ -1,7 +1,11 @@
 # Vimming
 
-Vimming brings a customized vim to your terminal featuring great plugins like CtrlP, Airline,
-BufExplorer, and more. (For all the plugins, take a look at the Rakefile)
+Vimming quickly setups up a customized vim to your terminal featuring solarized-light 
+theme, a customized status line, and uses great plugins like CtrlP, 
+Airline, BufExplorer, and more. (For all the plugins, take a look at the 
+Rakefile)
+
+Just install, clone, rake, and `vim`.
 
 # Installation
 
