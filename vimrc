@@ -203,7 +203,7 @@ nnoremap <Leader>ut :GundoToggle<cr>
 nnoremap <Leader>ct :!ctags -R .<CR>
 
 " <Leader>y: Copy to system clipboard
-nnoremap <leader>y "*y
+map <leader>y "*y
 
 " <Leader>/: Clear highlighted searches
 nnoremap <Leader>/ :nohlsearch<CR>
@@ -228,6 +228,10 @@ inoremap <C-c> <esc>
 
 " Tab completion
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
+" bind K to grep word under cursor
+nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
+nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " gc: Comment toggle
 
@@ -275,7 +279,7 @@ let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g "" -p ~/'
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_use_caching = 0
+" let g:ctrlp_use_caching = 0
 
 " Session
 let g:session_directory = '~/.vim/session'

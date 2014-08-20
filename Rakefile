@@ -35,3 +35,6 @@ plugin 'vim-sensible'            , 'git://github.com/tpope/vim-sensible.git'
 plugin 'vim-session'             , 'git://github.com/xolox/vim-session.git'
 plugin 'vim-surround'            , 'git://github.com/tpope/vim-surround.git'
 plugin 'vim-unimpaired'          , 'git://github.com/tpope/vim-unimpaired.git'
+plugin 'vim-textobj-user'        , 'git://github.com/kana/vim-textobj-user.git'
+plugin 'vim-textobj-ruby'        , 'git://github.com/tek/vim-textobj-ruby.git'
+
