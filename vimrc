@@ -121,15 +121,6 @@ set textwidth=80
 " Auto complete setting
 set completeopt=longest,menuone
 
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-
 " Wild menu settings
 set wildmode=list:longest,full
 set wildmenu "turn on wild menu
@@ -208,6 +199,9 @@ map <leader>y "*y
 " <Leader>/: Clear highlighted searches
 nnoremap <Leader>/ :nohlsearch<CR>
 
+" <Leader>n: Rename current file
+map <leader>n :call RenameFile()<cr>
+
 " <Leader>bs: Open BufExplorer horizontal split
 
 " <Leader>bv: Open BufExplorer vertical split
@@ -234,6 +228,30 @@ nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
 nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " gc: Comment toggle
+
+"===============================================================================
+" Functions
+"===============================================================================
+
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+
+" From Gary B.
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
 
 "===============================================================================
 " Autocommands
