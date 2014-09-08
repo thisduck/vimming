@@ -279,7 +279,7 @@ let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g "" -p ~/'
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" let g:ctrlp_use_caching = 0
+let g:ctrlp_use_caching = 0
 
 " Session
 let g:session_directory = '~/.vim/session'
