@@ -41,4 +41,5 @@ plugin 'vim-textobj-rubyblock',    'git://github.com/nelstrom/vim-textobj-rubybl
 plugin 'vim-textobj-user',         'git://github.com/kana/vim-textobj-user.git'
 plugin 'vim-unimpaired',           'git://github.com/tpope/vim-unimpaired.git'
 plugin 'vim2hs',                   'git://github.com/dag/vim2hs.git'
+plugin 'vimproc',                  'git://github.com/Shougo/vimproc.vim.git'
 
