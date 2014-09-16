@@ -40,8 +40,8 @@ set number
   endif
 
   " bind K to grep word under cursor
-  nnoremap K :grep! "<C-R><C-W>"<CR>:cw<CR>
-  nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  nnoremap K :Ag! "<C-R><C-W>"<CR>:cw<CR>
+  nnoremap KK :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " run ctags to take advantage of this: ctags -R .
 nnoremap <leader>. :CtrlPTag<CR>
@@ -204,3 +204,16 @@ let g:yankring_replace_n_pkey = '<C-t>'
 let g:ctrlp_map = '<c-p>'
 nmap <c-p> :CtrlP<CR>
 set background=light
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
+let g:airline_theme = 'powerlineish'
+let g:airline_powerline_fonts = 1
+nnoremap <Leader>\ :Ag<SPACE>
