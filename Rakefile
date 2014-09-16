@@ -27,6 +27,7 @@ plugin 'vim-endwise',              'git://github.com/tpope/vim-endwise.git'
 plugin 'vim-fugitive',             'git://github.com/tpope/vim-fugitive.git'
 plugin 'vim-gitgutter',            'git://github.com/airblade/vim-gitgutter.git'
 plugin 'vim-haml',                 'git://github.com/tpope/vim-haml.git'
+plugin 'vim-hdevtools',            'git://github.com/bitc/vim-hdevtools.git'
 plugin 'vim-indent-guides',        'git://github.com/nathanaelkane/vim-indent-guides.git'
 plugin 'vim-indent-object',        'git://github.com/michaeljsmith/vim-indent-object.git'
 plugin 'vim-matchit',              'git://github.com/edsono/vim-matchit.git'
@@ -41,5 +42,4 @@ plugin 'vim-textobj-rubyblock',    'git://github.com/nelstrom/vim-textobj-rubybl
 plugin 'vim-textobj-user',         'git://github.com/kana/vim-textobj-user.git'
 plugin 'vim-unimpaired',           'git://github.com/tpope/vim-unimpaired.git'
 plugin 'vim2hs',                   'git://github.com/dag/vim2hs.git'
-plugin 'vimproc',                  'git://github.com/Shougo/vimproc.vim.git'
 
