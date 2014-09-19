@@ -36,6 +36,7 @@ plugin 'ag.vim', 'git@github.com:rking/ag.vim.git'
 plugin 'vim-visual-star-search', 'git@github.com:nelstrom/vim-visual-star-search.git'
 plugin 'greplace', 'git@github.com:skwp/greplace.vim.git'
 plugin 'vim-sneak', 'git@github.com:justinmk/vim-sneak.git'
+plugin 'neocomplete.vim', 'git@github.com:Shougo/neocomplete.vim.git'
 
 # plugin 'AutoTag', 'git@github.com:vim-scripts/AutoTag.git'
 # plugin 'vim-textobj-rubyblock', 'git@github.com:nelstrom/vim-textobj-rubyblock.git'

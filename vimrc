@@ -8,23 +8,67 @@ colorscheme solarized
 let mapleader = " "
 
 syntax on
+set number
 set hidden
+set showcmd
+set noshowmode " we have airline
+set history=1000
+set gcr=a:blinkon0 " no blinking!
+set visualbell
+
 set backspace=indent,eol,start
+
+set smarttab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-filetype plugin indent on
+
+filetype plugin on
+filetype indent on
+
+" Display tabs and trailing spaces visually
+set list listchars=tab:\ \ ,trail:·
 
 " folding
 set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+
+set nowrap
+set linebreak
+
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+set scrolloff=8
+set sidescrolloff=15
+set sidescroll=1
 
 set nobackup
 set noswapfile
-set number
+set nowb
+
+" https://github.com/skwp/dotfiles/blob/master/vimrc
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
 
 " from: http://robots.thoughtbot.com/faster-grepping-in-vim/
   " The Silver Searcher
@@ -71,10 +115,10 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
   let g:syntastic_check_on_open=1
 
   " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
-  let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+  " let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
   " Index ctags from any project, including those outside Rails
-  map <Leader>ct :!ctags -R .<CR>
+  map <Leader>ct :!ctags -R .<CR><CR>
 
   " Switch between the last two files
   nnoremap <leader><leader> <c-^>
@@ -108,29 +152,11 @@ nmap <silent> <Leader>/ :nohlsearch<CR>
     autocmd BufRead,BufNewFile *.md setlocal textwidth=80
   augroup END
 
-  " Tab completion
-  " will insert tab at beginning of line,
-  " will use completion if not at beginning
-  set wildmode=list:longest,list:full
-  set complete=.,w,t
-  function! InsertTabWrapper()
-      let col = col('.') - 1
-      if !col || getline('.')[col - 1] !~ '\k'
-          return "\<tab>"
-      else
-          return "\<c-p>"
-      endif
-  endfunction
-  inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-
-
-
 set shell=/bin/sh
 
 " automatically open quickfix after grep
 autocmd QuickFixCmdPost *grep* cwindow
 set cursorline
-set showcmd
 
 " from gary b
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -205,15 +231,6 @@ let g:ctrlp_map = '<c-p>'
 nmap <c-p> :CtrlP<CR>
 set background=light
 
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-if has('persistent_undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
-endif
-
 let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
-nnoremap <Leader>\ :Ag<SPACE>
+nnoremap <Leader>\ :Ag ""<Left>
