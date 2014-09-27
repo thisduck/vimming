@@ -26,7 +26,7 @@ set shell=/bin/sh
 set shortmess+=I
 
 " Theme
-colorscheme tomorrow-night
+colorscheme Tomorrow-Night
 
 " Turn on line number
 set number
@@ -349,7 +349,7 @@ endfunction
 
 let g:airline_theme_patch_func = 'AirLineTheme'
 function! AirLineTheme(palette)
-  if g:airline_theme == 'tomorrow-night'
+  if g:airline_theme == 'Tomorrow-Night'
 
     let green = ['', '', 255, 64, '']
     let magenta = ['', '', 255, 125, '']
