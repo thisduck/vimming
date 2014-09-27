@@ -26,8 +26,7 @@ set shell=/bin/sh
 set shortmess+=I
 
 " Theme
-set background=light
-colorscheme solarized
+colorscheme tomorrow-night
 
 " Turn on line number
 set number
@@ -319,6 +318,15 @@ map <Leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 hi link EasyMotionShade  Comment
 
+" Tmuxline
+let g:tmuxline_preset = {
+  \'a'       : '#S',
+  \'win'     : '#I #W',
+  \'cwin'    : '#I #W',
+  \'y'       : ['%R', '%a', '%Y'],
+  \'z'       : '#H'
+  \ }
+
 " Airline
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -341,7 +349,7 @@ endfunction
 
 let g:airline_theme_patch_func = 'AirLineTheme'
 function! AirLineTheme(palette)
-  if g:airline_theme == 'solarized'
+  if g:airline_theme == 'tomorrow-night'
 
     let green = ['', '', 255, 64, '']
     let magenta = ['', '', 255, 125, '']
