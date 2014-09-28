@@ -1,9 +1,12 @@
 # Vimming
 
-Vimming quickly setups up a customized vim to your terminal featuring solarized-light 
-theme, a customized status line, and uses great plugins like CtrlP, 
-Airline, BufExplorer, and more. (For all the plugins, take a look at the 
-Rakefile)
+Vimming quickly setups up a customized vim to your terminal featuring
+[tomorrow-night](https://github.com/chriskempson/vim-tomorrow-theme)
+theme, airline, and uses great plugins like
+[CtrlP](https://github.com/kien/ctrlp.vim),
+[BufExplorer](https://github.com/jlanzarotta/bufexplorer), and 
+more. (For all the plugins, take a look at the
+[Rakefile](https://github.com/hinshun/vimming/blob/master/Rakefile)
 
 Just install, clone, rake, and `vim`.
 
