@@ -1,6 +1,7 @@
 # Vimming
 
-Vimming quickly setups up a customized vim to your terminal featuring
+Vimming is a quick vim setup tool originally forked from
+[thisduck](https://github.com/thisduck/vimming) featuring
 [tomorrow-night](https://github.com/chriskempson/vim-tomorrow-theme)
 theme, airline, and uses great plugins like
 [CtrlP](https://github.com/kien/ctrlp.vim),
